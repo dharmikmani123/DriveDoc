@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Spanner AI</title>
+    <link rel="stylesheet" href="spanner.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-tools"></i> Smart Spanner AI</h1>
+            <p>An AI assistant for your vehicle repairs by Drive Doc</p>
+        </header>
+
+        <div class="chat-container">
+            <div class="chat-messages" id="chat-messages">
+                <div class="message bot">
+                    <div class="message-content">
+                        <p>Hello! I'm your vehicle repair assistant Smart Spanner AI. Please describe your vehicle issue, and I'll recommend relevant repair videos to help you fix it.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input">
+                <input type="text" id="user-input" placeholder="Type your vehicle issue here...">
+                <button id="send-button"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+
+        <div class="video-recommendations" id="video-recommendations">
+            <!-- Video recommendations will be added here -->
+        </div>
+    </div>
+
+    <script src="spanner.js"></script>
+</body>
+</html> 

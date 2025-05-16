@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DriveDoc</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        .chat-support {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #4285F4;
+            padding: 15px;
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            transition: all 0.3s ease;
+            margin-right: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .chat-support:hover {
+            background: #3367D6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+
+        .chat-support i {
+            font-size: 24px;
+        }
+
+        .chat-support span {
+            display: none;
+        }
+
+        .chat-support.chat-btn {
+            background: #34A853;
+            right: 20px;
+        }
+
+        .chat-support.chat-btn:hover {
+            background: #2D8F47;
+        }
+
+        .chat-support.ai-btn {
+            background: #4285F4;
+            right: 80px;
+        }
+
+        .chat-support.ai-btn:hover {
+            background: #3367D6;
+        }
+
+        .container {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="Screenshot__109_-removebg-preview (1).png" alt="DriveDoc Logo">
+                <h1>DriveDoc</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="emergency.html">Emergency</a></li>
+                    <li><a href="documents.html">My Documents</a></li>
+                    <li><a href="weather.html">Weather</a></li>
+                    <li><a href="trafics.html">Charging Stations</a></li>
+                    <li><a href="speed.html">Traffic</a></li>
+                </ul>
+            </nav>
+            <a href="spanner.html" class="chat-support ai-btn" title="AI Assistant">
+                <i class="fas fa-robot"></i>
+            </a>
+            <a href="chat.html" class="chat-support chat-btn" title="Chat Support">
+                <i class="fas fa-comment-dots"></i>
+            </a>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Your Complete Highway Services Solution</h2>
+                <p>Emergency assistance, document storage, and real-time highway information all in one place.</p>
+                <div class="cta-buttons">
+                    <a href="emergency.html" class="btn-primary">Need Help Now?</a>
+                    <a href="documents.html" class="btn-secondary">Store Documents</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="highway.png" alt="Highway services illustration">
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <h3>Why Choose DriveDoc?</h3>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-road"></i>
+                    <h4>Real-time Highway Info</h4>
+                    <p>Get live updates on traffic, construction, and weather conditions.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-ambulance"></i>
+                    <h4>Emergency Assistance</h4>
+                    <p>Connect with nearby help for breakdowns or accidents.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-file-alt"></i>
+                    <h4>Document Storage</h4>
+                    <p>Keep your driving documents secure and accessible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>DriveDoc</h5>
+                    <p>Your trusted highway services companion.</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="emergency.html">Emergency</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>Contact</h5>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> Emergency: 1800-DRIVEDOC</li>
+                        <li><i class="fas fa-envelope"></i> support@drivedoc.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

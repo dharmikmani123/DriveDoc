@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Assistance | DriveDoc</title>
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://web3forms.com/client/script.js" async defer></script>
+    <script>
+        function validateEmergencyForm(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('emergencyForm');
+            const submitButton = form.querySelector('button[type="submit"]');
+            
+            
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Sending...';
+            
+        
+            form.submit();
+            
+            
+            setTimeout(() => {
+                window.location.href = 'thank-you.html';
+            }, 2000);
+            
+            return false;
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="Screenshot__109_-removebg-preview (1).png" alt="DriveDoc Logo">
+                <h1>DriveDoc</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="emergency.html" class="active">Emergency</a></li>
+                    <li><a href="documents.html">My Documents</a></li>
+                    <li><a href="weather.html">Weather</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <section class="emergency-hero">
+        <div class="container">
+            <h2>Emergency Roadside Assistance</h2>
+            <p>We'll connect you with help immediately</p>
+        </div>
+    </section>
+
+    <section class="emergency-form">
+        <div class="container">
+            <div class="form-container">
+                <h3>Request Assistance</h3>
+                <form action="https://api.web3forms.com/submit" method="POST" id="emergencyForm" onsubmit="return validateEmergencyForm(event)">
+                    <input type="hidden" name="access_key" value="75846401-76eb-4c61-8f91-1d7ed2f5d3e6">
+                    <input type="hidden" name="subject" value="Emergency Assistance Request - DriveDoc">
+                    <input type="hidden" name="redirect" value="thank-you.html">
+                    <input type="hidden" name="from_name" value="DriveDoc Emergency System">
+                    <input type="hidden" name="replyto" value="support@drivedoc.com">
+                    <input type="hidden" name="template_id" value="emergency_assistance">
+                    
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="Devara Sai Teja Reddy">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number*</label>
+                        <input type="tel" id="phone" name="phone" placeholder="1234567890" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Your Location*</label>
+                        <input type="text" id="location" name="location" placeholder="Near Red Sea" required>
+                        <small>Be as specific as possible</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="issue">Issue Type*</label>
+                        <select id="issue" name="issue" required>
+                            <option value="">Select your issue</option>
+                            <option value="flat_tire">Flat Tire</option>
+                            <option value="out_of_gas">Out of Gas</option>
+                            <option value="battery_jump">Battery Jump</option>
+                            <option value="lockout">Locked Out</option>
+                            <option value="accident">Accident</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="details">Additional Details</label>
+                        <textarea id="details" name="details" rows="4" placeholder="Describe your situation..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <div class="h-captcha" data-captcha="true"></div>
+                    </div>
+                    <button type="submit" class="btn-emergency">
+                        <i class="fas fa-ambulance"></i> Request Help Now
+                    </button>
+                </form>
+            </div>
+            <div class="emergency-contacts">
+                <h3>Immediate Contacts</h3>
+                <div class="contact-card">
+                    <h4><i class="fas fa-phone-alt"></i> Highway Patrol</h4>
+                    <p>Dial *HP (*47) from your mobile</p>
+                    <a href="tel:*47" class="btn-call">Call Now</a>
+                </div>
+                <div class="contact-card">
+                    <h4><i class="fas fa-ambulance"></i> Medical Emergency</h4>
+                    <p>Dial 911 for life-threatening emergencies</p>
+                    <a href="tel:911" class="btn-call">Call 911</a>
+                </div>
+                <div class="contact-card">
+                    <h4><i class="fas fa-truck-pickup"></i> DriveDoc Support</h4>
+                    <p>24/7 customer service line</p>
+                    <a href="tel:18003743362" class="btn-call">1-800-DRIVEDOC</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="safety-tips">
+        <div class="container">
+            <h3>Safety Tips While You Wait</h3>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <i class="fas fa-car-side"></i>
+                    <h4>Move to Safety</h4>
+                    <p>If possible, move your vehicle to the shoulder or emergency lane.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h4>Turn on Hazards</h4>
+                    <p>Activate your hazard lights to alert other drivers.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-vest"></i>
+                    <h4>Wear Reflective Gear</h4>
+                    <p>If exiting the vehicle, wear reflective clothing if available.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Note Your Location</h4>
+                    <p>Look for mile markers or landmarks to help identify your position.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>DriveDoc</h5>
+                    <p>Your trusted highway services companion.</p>
+                </div>
+                <div class="footer-section">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="emergency.html">Emergency</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h5>Contact</h5>
+                    <ul>
+                        <li><i class="fas fa-phone"></i> Emergency: 1800-DRIVEDOC</li>
+                        <li><i class="fas fa-envelope"></i> support@drivedoc.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Maps API Key Test</title>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .status {
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .instructions {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+        }
+        .api-key-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .test-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="instructions">
+        <h2>How to Get a Valid API Key</h2>
+        <ol>
+            <li>Go to <a href="https://console.cloud.google.com/" target="_blank">Google Cloud Console</a></li>
+            <li>Create a new project or select an existing one</li>
+            <li>Enable these APIs:
+                <ul>
+                    <li>Maps JavaScript API</li>
+                    <li>Places API</li>
+                    <li>Directions API</li>
+                    <li>Geocoding API</li>
+                </ul>
+            </li>
+            <li>Go to "APIs & Services" > "Credentials"</li>
+            <li>Click "Create Credentials" > "API Key"</li>
+            <li>Copy your new API key and paste it below:</li>
+        </ol>
+        <input type="text" id="apiKeyInput" class="api-key-input" placeholder="Paste your API key here">
+        <button onclick="testNewApiKey()" class="test-button">Test API Key</button>
+    </div>
+
+    <div id="status" class="status"></div>
+    <div id="map">Loading map...</div>
+
+    <script>
+        function testNewApiKey() {
+            const apiKey = document.getElementById('apiKeyInput').value.trim();
+            if (!apiKey) {
+                alert('Please enter an API key');
+                return;
+            }
+            loadMap(apiKey);
+        }
+
+        function loadMap(apiKey) {
+            const statusDiv = document.getElementById('status');
+            const mapDiv = document.getElementById('map');
+            
+            // Clear previous map
+            mapDiv.innerHTML = 'Loading map...';
+            statusDiv.innerHTML = '';
+            statusDiv.className = 'status';
+
+            // Create new script element
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMap`;
+            script.async = true;
+            script.defer = true;
+            
+            // Remove any existing Google Maps script
+            const existingScript = document.querySelector('script[src*="maps.googleapis.com"]');
+            if (existingScript) {
+                existingScript.remove();
+            }
+
+            // Add error handler
+            script.onerror = function() {
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = `
+                    <h2>Error Loading Google Maps</h2>
+                    <p>Failed to load the Google Maps API. Please check:</p>
+                    <ul>
+                        <li>Your internet connection</li>
+                        <li>The API key is correct</li>
+                        <li>All required APIs are enabled</li>
+                        <li>Your billing is set up</li>
+                    </ul>
+                `;
+                mapDiv.innerHTML = 'Map failed to load';
+            };
+
+            document.head.appendChild(script);
+        }
+
+        function initMap() {
+            const statusDiv = document.getElementById('status');
+            const mapDiv = document.getElementById('map');
+            
+            try {
+                const map = new google.maps.Map(mapDiv, {
+                    center: { lat: 40.7128, lng: -74.0060 },
+                    zoom: 12
+                });
+                
+                // Test additional services
+                const geocoder = new google.maps.Geocoder();
+                const directionsService = new google.maps.DirectionsService();
+                const placesService = new google.maps.places.PlacesService(map);
+                
+                statusDiv.className = 'status success';
+                statusDiv.innerHTML = `
+                    <h2>API Key Status: Valid</h2>
+                    <p>Your Google Maps API key is working correctly.</p>
+                    <p>Available Services:</p>
+                    <ul>
+                        <li>Maps ✓</li>
+                        <li>Geocoding ✓</li>
+                        <li>Directions ✓</li>
+                        <li>Places ✓</li>
+                    </ul>
+                `;
+            } catch (error) {
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = `
+                    <h2>API Key Status: Invalid</h2>
+                    <p>Error: ${error.message}</p>
+                    <p>Please check:</p>
+                    <ul>
+                        <li>Your API key is correct</li>
+                        <li>The API key has the necessary permissions enabled</li>
+                        <li>Your billing is set up correctly</li>
+                        <li>You haven't exceeded your quota</li>
+                    </ul>
+                `;
+                mapDiv.innerHTML = 'Map failed to load';
+            }
+        }
+    </script>
+</body>
+</html> 

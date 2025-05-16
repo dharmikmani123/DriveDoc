@@ -1,0 +1,159 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 24px;
+    color: #2c3e50;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #e74c3c;
+}
+
+.status-dot.connected {
+    background-color: #2ecc71;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+
+.dashboard {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.speed-display {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.speed-value {
+    font-size: 72px;
+    font-weight: 700;
+    color: #2c3e50;
+    line-height: 1;
+}
+
+.unit {
+    font-size: 24px;
+    color: #7f8c8d;
+}
+
+.trip-details {
+    margin-bottom: 30px;
+}
+
+.trip-details input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.trip-details input:focus {
+    outline: none;
+    border-color: #3498db;
+}
+
+.info-panel {
+    display: grid;
+    gap: 15px;
+}
+
+.info-card {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.info-card h3 {
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-bottom: 10px;
+}
+
+.signal-meter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.signal-bars {
+    display: flex;
+    gap: 2px;
+}
+
+.bar {
+    width: 4px;
+    height: 20px;
+    background-color: #ddd;
+}
+
+.bar.active {
+    background-color: #2ecc71;
+}
+
+.map-container {
+    height: 600px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+    
+    .map-container {
+        height: 400px;
+    }
+} 

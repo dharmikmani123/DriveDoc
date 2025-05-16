@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EV Charging Station Finder</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.18.0/maps/maps.css"/>
+  <style>
+    body { margin: 0; font-family: sans-serif; }
+    #map { height: 70vh; width: 100%; }
+    #searchContainer { padding: 1rem; background: #f5f5f5; }
+    input, button { padding: 0.5rem; font-size: 16px; }
+    #results { padding: 1rem; }
+  </style>
+</head>
+<body>
+  <div id="searchContainer">
+    <input type="text" id="locationInput" placeholder="Enter a location..." />
+    <button onclick="findChargingStations()">Search</button>
+  </div>
+  <div id="map"></div>
+  <div id="results"></div>
+
+  <!-- MAP SDK JS -->
+  <script src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.18.0/maps/maps-web.min.js"></script>
+  <script>
+    const apiKey = "zwGGG06zs0mXuqcFG2KLd9ysNiIxpuxY";
+    let map;
+
+    function initMap(lat = 13.0827, lon = 80.2707) {
+      map = tt.map({
+        key: apiKey,
+        container: "map",
+        center: [lon, lat],
+        zoom: 12
+      });
+      map.addControl(new tt.NavigationControl());
+    }
+
+    async function findChargingStations() {
+      const location = document.getElementById("locationInput").value;
+      if (!location) return alert("Please enter a location.");
+
+      const geoURL = `https://api.tomtom.com/search/2/geocode/${encodeURIComponent(location)}.JSON?key=${apiKey}`;
+      const geoRes = await fetch(geoURL);
+      const geoData = await geoRes.json();
+
+      if (!geoData.results.length) {
+        alert("Location not found!");
+        return;
+      }
+
+      const { lat, lon } = geoData.results[0].position;
+      map.flyTo({ center: [lon, lat], zoom: 13 });
+
+      const poiURL = `https://api.tomtom.com/search/2/poiSearch/charging station.JSON?lat=${lat}&lon=${lon}&radius=10000&key=${apiKey}`;
+      const poiRes = await fetch(poiURL);
+      const poiData = await poiRes.json();
+
+      document.getElementById("results").innerHTML = "<h3>Charging Stations:</h3>";
+
+      poiData.results.forEach(station => {
+        const { lat, lon } = station.position;
+        const marker = new tt.Marker().setLngLat([lon, lat]).addTo(map);
+        const name = station.poi.name || "Unknown";
+        const address = station.address.freeformAddress || "";
+
+        const div = document.createElement("div");
+        div.innerHTML = `<strong>${name}</strong><br>${address}<hr>`;
+        document.getElementById("results").appendChild(div);
+      });
+    }
+
+    window.onload = () => initMap();
+  </script>
+</body>
+</html>

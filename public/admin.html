@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Admin Dashboard</title>
+    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <header>
+            <h1>Chat Admin Dashboard</h1>
+        </header>
+
+        <section class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Messages</h3>
+                    <p id="totalMessages">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Rooms</h3>
+                    <p id="activeRooms">0</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Messages Today</h3>
+                    <p id="messagesToday">0</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="messages-section">
+            <div class="filters">
+                <select id="roomFilter">
+                    <option value="">All Rooms</option>
+                </select>
+                <select id="typeFilter">
+                    <option value="">All Types</option>
+                    <option value="text">Text</option>
+                    <option value="image">Image</option>
+                    <option value="file">File</option>
+                </select>
+                <input type="date" id="dateFilter">
+                <button id="applyFilters">Apply Filters</button>
+            </div>
+
+            <div class="messages-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room</th>
+                            <th>User</th>
+                            <th>Message</th>
+                            <th>Type</th>
+                            <th>Time</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="messagesTableBody">
+                        <!-- Messages will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination">
+                <button id="prevPage">Previous</button>
+                <span id="pageInfo">Page 1 of 1</span>
+                <button id="nextPage">Next</button>
+            </div>
+        </section>
+
+        <!-- Reply Modal -->
+        <div id="replyModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Reply to User</h2>
+                <div class="reply-info">
+                    <p><strong>Room:</strong> <span id="replyRoom"></span></p>
+                    <p><strong>User:</strong> <span id="replyUser"></span></p>
+                </div>
+                <textarea id="replyMessage" placeholder="Type your reply..."></textarea>
+                <div class="modal-actions">
+                    <button id="sendReply">Send Reply</button>
+                    <button id="cancelReply">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html> 

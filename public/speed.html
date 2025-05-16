@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Speed Tracker</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="speed.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Vehicle Speed Tracker</h1>
+            <div class="status-indicator">
+                <span class="status-dot"></span>
+                <span class="status-text">GPS Status: Connecting...</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="dashboard">
+                <div class="speed-display">
+                    <h2>Current Speed</h2>
+                    <div class="speed-value">0</div>
+                    <span class="unit">km/h</span>
+                </div>
+
+                <div class="trip-details">
+                    <div class="info-card">
+                        <h3>Departure Point</h3>
+                        <input type="text" id="departure-point" placeholder="Enter departure location">
+                        <p id="departure-coords">Not set</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Destination Point</h3>
+                        <input type="text" id="destination-point" placeholder="Enter destination location">
+                        <p id="destination-coords">Not set</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Trip Information</h3>
+                        <p>Distance: <span id="trip-distance">--</span> km</p>
+                        <p>ETA: <span id="eta">--:--</span></p>
+                        <p>Time Elapsed: <span id="time-elapsed">00:00:00</span></p>
+                    </div>
+                </div>
+
+                <div class="info-panel">
+                    <div class="info-card">
+                        <h3>Location</h3>
+                        <p id="location">Acquiring location...</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Signal Strength</h3>
+                        <div class="signal-meter">
+                            <div class="signal-bars">
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                            </div>
+                            <span class="signal-text">Good</span>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <h3>Last Update</h3>
+                        <p id="last-update">--:--:--</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="map-container">
+                <div id="map"></div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine@3.2.12/dist/leaflet-routing-machine.js"></script>
+    <script src="speed.js"></script>
+</body>
+</html> 
