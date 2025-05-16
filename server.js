@@ -615,6 +615,44 @@ io.on('connection', (socket) => {
     });
 });
 
+// Charging stations endpoint
+app.get('/api/charging-stations', async (req, res) => {
+    try {
+        // Mock data - replace with actual database query in production
+        const stations = [
+            {
+                name: "EV Charging Hub - City Center",
+                location: "123 Main Street, City Center",
+                availablePoints: 5,
+                status: "Open 24/7"
+            },
+            {
+                name: "Highway Express Charging",
+                location: "456 Highway Avenue",
+                availablePoints: 3,
+                status: "Open"
+            },
+            {
+                name: "Green Energy Station",
+                location: "789 Eco Drive",
+                availablePoints: 8,
+                status: "Open 24/7"
+            },
+            {
+                name: "Quick Charge Point",
+                location: "321 Fast Lane",
+                availablePoints: 2,
+                status: "Open"
+            }
+        ];
+        
+        res.json(stations);
+    } catch (error) {
+        console.error('Error fetching charging stations:', error);
+        res.status(500).json({ error: 'Failed to fetch charging stations' });
+    }
+});
+
 // Start server
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
