@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const multer = require('multer');
 const fs = require('fs');
+const fetch = require('node-fetch');
 
 const app = express();
 const server = http.createServer(app);
@@ -615,41 +616,34 @@ io.on('connection', (socket) => {
     });
 });
 
-// Charging stations endpoint
-app.get('/api/charging-stations', async (req, res) => {
+// Charging Stations Endpoints
+app.get('/api/charging-stations/geocode', async (req, res) => {
     try {
-        // Mock data - replace with actual database query in production
-        const stations = [
-            {
-                name: "EV Charging Hub - City Center",
-                location: "123 Main Street, City Center",
-                availablePoints: 5,
-                status: "Open 24/7"
-            },
-            {
-                name: "Highway Express Charging",
-                location: "456 Highway Avenue",
-                availablePoints: 3,
-                status: "Open"
-            },
-            {
-                name: "Green Energy Station",
-                location: "789 Eco Drive",
-                availablePoints: 8,
-                status: "Open 24/7"
-            },
-            {
-                name: "Quick Charge Point",
-                location: "321 Fast Lane",
-                availablePoints: 2,
-                status: "Open"
-            }
-        ];
+        const { location } = req.query;
+        const apiKey = process.env.TOMTOM_API_KEY || 'zwGGG06zs0mXuqcFG2KLd9ysNiIxpuxY';
+        const geoURL = `https://api.tomtom.com/search/2/geocode/${encodeURIComponent(location)}.JSON?key=${apiKey}`;
         
-        res.json(stations);
+        const response = await fetch(geoURL);
+        const data = await response.json();
+        res.json(data);
     } catch (error) {
-        console.error('Error fetching charging stations:', error);
-        res.status(500).json({ error: 'Failed to fetch charging stations' });
+        console.error('Error in geocoding:', error);
+        res.status(500).json({ error: 'Failed to geocode location' });
+    }
+});
+
+app.get('/api/charging-stations/search', async (req, res) => {
+    try {
+        const { lat, lon } = req.query;
+        const apiKey = process.env.TOMTOM_API_KEY || 'zwGGG06zs0mXuqcFG2KLd9ysNiIxpuxY';
+        const poiURL = `https://api.tomtom.com/search/2/poiSearch/charging station.JSON?lat=${lat}&lon=${lon}&radius=10000&key=${apiKey}`;
+        
+        const response = await fetch(poiURL);
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        console.error('Error in POI search:', error);
+        res.status(500).json({ error: 'Failed to find charging stations' });
     }
 });
 
